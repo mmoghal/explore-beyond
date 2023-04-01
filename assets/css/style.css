@@ -25,3 +25,32 @@ body {
     align-items: center;
     padding: 1rem;
   }
+
+  /* Style for the title for our webpage */
+
+.title-wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .title-description {
+    color: #ff5722;
+    font-style: italic;
+    font-weight: 600;
+  }
+  
+  /* Set the font size for the main heading */
+  header h1 {
+    font-size: 2rem;
+  }
+  
+  /* Set the styles for the search form */
+  #search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
