@@ -1,0 +1,27 @@
+/* Set the font and margin/padding for the entire body */
+body {
+    font-family: "Helvetica Neue", sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Set the font weight and margin for all heading tags */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  /* Set the styles for the header section */
+  header {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+  }
