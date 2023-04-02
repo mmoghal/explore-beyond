@@ -17,6 +17,8 @@
       <div class="title-wrapper">
         <h1>Explore Beyond</h1>
         <p class="title-description">Unleash Your Inner Explorer</p>
+        <div id="time-container"></div>
+        <div id="weather-container"></div>
       </div>
 
       <!-- Search form for searching nearby places -->
@@ -31,6 +33,11 @@
         </select>
         <button type="submit" id="search-button">Search</button>
       </form>
+
+
+
+
+
 
       <!-- User login option -->
       <form id="login-form">
@@ -63,9 +70,12 @@
       id="map-search-box"
       placeholder="Search for a place or address"
     />
+    <input type="text" id="destination" name="destination" placeholder="Enter your destination" required>
+    <button id="calculate-route" type="submit">Calculate Route</button>
+
 
     <main>
-      <!-- Container for the map display -->
+      <!-- Container for the map, weather and date and time display -->
       <div id="map-container"></div>
       <!-- Container for displaying search results -->
       <div id="results-container"></div>
@@ -91,6 +101,8 @@
             Connect with us to explore further
           </button>
         </section>
+
+
 
         <!-- Form for connecting with us and leaving a comment-->
         <form id="comment-form">
@@ -138,6 +150,17 @@
       </div>
     </main>
 
+ 
+    
+    <!-- News articles section -->
+
+    <section id="news-section">
+      <h2>Latest News</h2>
+      <div id="news-container">
+        <div class="loader"></div>
+      </div>
+    </section>
+
     <!-- Footer section -->
     <footer>
       <p>
@@ -152,6 +175,7 @@
       </div>
     </footer>
 
+    
     <!-- Footer section -->
     <footer>
       <p>
@@ -161,9 +185,30 @@
       </p>
     </footer>
 
+
+    <div id="directions-container">
+      <form id="directions-form">
+        <label for="start-input">Starting Point:</label>
+        <input type="text" id="start-input" name="start-input">
+    
+        <label for="end-input">Ending Point:</label>
+        <input type="text" id="end-input" name="end-input">
+    
+        <button type="submit">Get Directions</button>
+      </form>
+    
+      <div id="map"></div>
+      <div id="distance"></div>
+    </div>
+    
+
+
+    
+
     <!-- Load the Google Maps API and other necessary scripts -->
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+    <script src="https://api.openweathermap.org/data/2.5/weather"></script>
     <script src="./assets/scripts/script.js"></script>
   </body>
 </html>

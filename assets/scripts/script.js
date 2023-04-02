@@ -7,10 +7,92 @@ function initMap() {
     function (position) {
       const lat = position.coords.latitude;
       const lng = position.coords.longitude;
+
+      // Get the current date and time
+      const updateTime = () => {
+        const date = new Date();
+        const currentTime = date.toLocaleString();
+        const timeContainer = document.getElementById("time-container");
+        timeContainer.innerHTML = `Current Time: ${currentTime}`;
+      };
+      updateTime();
+      setInterval(updateTime, 1000);
+
+      // Make a request to the OpenWeatherMap API to get the weather information for the user's location
+      fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=81822968b5a226abb1a2fbacd053f10a`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          const temp = Math.round((data.main.temp - 273.15) * 1.8 + 32);
+          const desc = data.weather[0].description;
+          // Display the weather information and current time on the page
+          const weatherContainer = document.getElementById("weather-container");
+          weatherContainer.innerHTML = `Temperature: ${temp}°C, ${desc}`;
+        })
+        .catch((error) => {
+          console.error("Error fetching weather data:", error);
+        });
+
       map = new google.maps.Map(document.getElementById("map-container"), {
         center: { lat: lat, lng: lng },
         zoom: 15,
       });
+      
+
+
+// Make a request to the News API to get the latest news based on the user's location
+const url = `https://newsapi.org/v2/top-headlines?country=us&category=general&pageSize=10&apiKey=256a5356438c4e82bead4f37f7bd8746&lat=${lat}&lon=${lng}`;
+fetch(url)
+  .then((response) => response.json())
+  .then((data) => {
+    // Process the data here
+    console.log(data);
+    displayNewsArticles(data.articles);
+  })
+  .catch((error) => {
+    console.error("Error fetching news data:", error);
+  });
+
+function displayNewsArticles(articles) {
+  const newsContainer = document.getElementById("news-container");
+  newsContainer.innerHTML = ""; // Clear previous articles
+
+  articles.forEach((article) => {
+    // Create a new div to hold the article
+    const articleDiv = document.createElement("div");
+    articleDiv.classList.add("article");
+
+    // Create elements to display the article's title, description, and image (if available)
+    const title = document.createElement("h3");
+    title.textContent = article.title;
+    articleDiv.appendChild(title);
+
+    if (article.description) {
+      const description = document.createElement("p");
+      description.textContent = article.description;
+      articleDiv.appendChild(description);
+    }
+
+    if (article.urlToImage) {
+      const image = document.createElement("img");
+      image.src = article.urlToImage;
+      image.alt = article.title;
+      articleDiv.appendChild(image);
+    }
+
+    // Add the article to the news container
+    newsContainer.appendChild(articleDiv);
+  });
+}
+
+
+
+
+
+
+
+
 
       // Add a marker for the user's location
       const userMarker = new google.maps.Marker({
@@ -24,6 +106,10 @@ function initMap() {
       const autocomplete = new google.maps.places.Autocomplete(input);
       autocomplete.bindTo("bounds", map);
 
+
+
+
+
       // function to add a listener for place changes
       autocomplete.addListener("place_changed", function () {
         const place = autocomplete.getPlace();
@@ -34,12 +120,68 @@ function initMap() {
           alert("No details available for input: '" + place.name + "'");
         }
       });
+
+    // function to initialize the Google Places Autocomplete feature for destination
+      const destinationInput = document.getElementById("destination");
+      const destinationAutocomplete = new google.maps.places.Autocomplete(destinationInput);
+      destinationAutocomplete.bindTo("bounds", map);
+      
+
+       // Initialize the directions renderer
+       directionsRenderer = new google.maps.DirectionsRenderer();
+       directionsRenderer.setMap(map);
+
+
+
+
+// Get the button element and add a click event listener to it
+const calculateRouteButton = document.getElementById("calculate-route");
+calculateRouteButton.addEventListener("click", calculateRoute);
+
+function calculateRoute() {
+  // Get the origin and destination from the autocomplete inputs
+  const origin = input.value;
+  const destination = destinationInput.value;
+
+  // Initialize the DirectionsService and DirectionsRenderer
+  const directionsService = new google.maps.DirectionsService();
+  directionsRenderer = new google.maps.DirectionsRenderer();
+  directionsRenderer.setMap(map);
+
+  // Set up the request for the DirectionsService
+  const request = {
+    origin: origin,
+    destination: destination,
+    travelMode: google.maps.TravelMode.DRIVING,
+  };
+
+  // Call the DirectionsService to get the route
+  directionsService.route(request, function (result, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      // Display the route on the map using the DirectionsRenderer
+      directionsRenderer.setDirections(result);
+    } else {
+      console.error("Error getting directions:", status);
+    }
+  });
+}
+
+
+
+
+
+
     },
     function () {
       alert("Could not retrieve your location.");
     }
   );
 }
+
+
+ 
+
+
 
 // Retrieve nearby places based on user's location and selected search type
 const searchTypes = document.getElementById("search-type");
@@ -226,3 +368,8 @@ loginForm.addEventListener("submit", (event) => {
     location.reload();
   }, 1000);
 });
+
+
+
+
+

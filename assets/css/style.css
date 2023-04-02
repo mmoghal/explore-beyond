@@ -26,6 +26,14 @@ body {
     padding: 1rem;
   }
 
+ /* #time-container {
+
+} */
+
+#weather-container {
+margin-top: 10px;
+}
+
   /* Style for the title for our webpage */
 
 .title-wrapper {
@@ -100,7 +108,7 @@ main {
 /* Set the styles for the map container */
 #map-container {
   width: 70%;
-  height: 600px;
+  height: 400px;
   margin: 1rem 0;
 }
 
@@ -108,7 +116,7 @@ main {
 #results-container {
   width: 100%;
   max-width: 800px;
-  margin-bottom: 1rem;
+  margin-bottom: 4rem;
 }
 
 /* Set the styles for the individual result containers */
@@ -368,12 +376,12 @@ footer {
   background-color: #333;
   color: #fff;
   font-weight: 600;
-  margin: 1px;
 }
 
 footer p {
   margin-bottom: 10px;
   text-align: center;
+  margin-top: 30px;
 }
 
 .social-media {
@@ -385,6 +393,7 @@ footer p {
   margin: 0 10px;
   color: #fff;
   font-size: 20px;
+  margin-top: 10px;
 }
 
 .social-media a:hover {
@@ -408,7 +417,7 @@ footer p {
 
 #services-container {
   background-color: #f8f8f8;
-  padding: 4rem;
+  padding: 1rem;
   text-align: center;
 }
 
@@ -468,8 +477,85 @@ footer p {
   animation: blink 5s linear infinite;
 }
 
-@keyframes blink {
+/*@keyframes blink {
   50% {
     opacity: 0;
   }
+}*/
+
+
+#news-section {
+  margin-top: 2rem;
+  text-align: center;
 }
+
+#news-section h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+#news-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 2rem;
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.article {
+  margin: 1rem;
+  max-width: 30%;
+  min-width: 20%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
+.article img {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.article h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.article p {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  margin: auto;
+  margin-top: 5rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+
+
+
+
+
