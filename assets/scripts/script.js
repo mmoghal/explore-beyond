@@ -86,14 +86,6 @@ function displayNewsArticles(articles) {
   });
 }
 
-
-
-
-
-
-
-
-
       // Add a marker for the user's location
       const userMarker = new google.maps.Marker({
         position: { lat: lat, lng: lng },
@@ -107,9 +99,6 @@ function displayNewsArticles(articles) {
       autocomplete.bindTo("bounds", map);
 
 
-
-
-
       // function to add a listener for place changes
       autocomplete.addListener("place_changed", function () {
         const place = autocomplete.getPlace();
@@ -121,6 +110,7 @@ function displayNewsArticles(articles) {
         }
       });
 
+
     // function to initialize the Google Places Autocomplete feature for destination
       const destinationInput = document.getElementById("destination");
       const destinationAutocomplete = new google.maps.places.Autocomplete(destinationInput);
@@ -130,9 +120,6 @@ function displayNewsArticles(articles) {
        // Initialize the directions renderer
        directionsRenderer = new google.maps.DirectionsRenderer();
        directionsRenderer.setMap(map);
-
-
-
 
 // Get the button element and add a click event listener to it
 const calculateRouteButton = document.getElementById("calculate-route");
@@ -148,12 +135,27 @@ function calculateRoute() {
   directionsRenderer = new google.maps.DirectionsRenderer();
   directionsRenderer.setMap(map);
 
+
+
+  const directionsButton = document.getElementById("directions-button");
+  console.log(directionsButton); // Adding this line to test
+  const directionsContainer = document.getElementById("directions-container");
+  directionsButton.addEventListener("click", function() {
+    console.log("Clicked"); // Adding this line to test
+  directionsContainer.style.display = "block";
+});
+
+
+
   // Set up the request for the DirectionsService
   const request = {
     origin: origin,
     destination: destination,
     travelMode: google.maps.TravelMode.DRIVING,
   };
+
+
+
 
   // Call the DirectionsService to get the route
   directionsService.route(request, function (result, status) {
@@ -167,6 +169,24 @@ function calculateRoute() {
 }
 
 
+const directionsService = new google.maps.DirectionsService();
+
+document.getElementById("calculate-route").addEventListener("click", function () {
+  const start = new google.maps.LatLng(lat, lng);
+  const destination = destinationAutocomplete.getPlace().geometry.location;
+
+  const request = {
+    origin: start,
+    destination: destination,
+    travelMode: "DRIVING",
+  };
+
+  directionsService.route(request, function (result, status) {
+    if (status == "OK") {
+      directionsRenderer.setDirections(result);
+    }
+  });
+});
 
 
 
@@ -180,6 +200,11 @@ function calculateRoute() {
 
 
  
+
+
+
+
+
 
 
 

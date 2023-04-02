@@ -107,8 +107,8 @@ main {
 
 /* Set the styles for the map container */
 #map-container {
-  width: 70%;
-  height: 400px;
+  width: 80%;
+  height: 160px;
   margin: 1rem 0;
 }
 
@@ -557,5 +557,15 @@ footer p {
 
 
 
+
+
+/*#directions-button {
+  padding: 10px;
+  background-color: #008CBA;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}*/
 
 
