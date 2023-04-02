@@ -40,3 +40,20 @@ function initMap() {
     }
   );
 }
+
+// Retrieve nearby places based on user's location and selected search type
+const searchTypes = document.getElementById("search-type");
+const searchButton = document.getElementById("search-button");
+searchButton.addEventListener("click", function (event) {
+  event.preventDefault();
+  const lat = map.getCenter().lat();
+  const lng = map.getCenter().lng();
+  const selectedType = searchTypes.value;
+  const request = {
+    location: { lat: lat, lng: lng },
+    radius: 1000, // Search radius in meters
+    type: selectedType,
+  };
+  const service = new google.maps.places.PlacesService(map);
+  service.nearbySearch(request, displayResults);
+});
