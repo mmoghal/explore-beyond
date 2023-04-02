@@ -54,3 +54,59 @@ body {
     align-items: center;
     margin-bottom: 2rem;
   }
+
+  /* Set the styles for the search input field */
+#search-input {
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  margin-right: 1rem;
+  width: 100%;
+  max-width: 400px;
+  border: none;
+  border-bottom: 2px solid #ff5722;
+  transition: border-bottom-color 0.2s ease-in-out;
+}
+
+/* Set the styles for the search input field when it is focused */
+#search-input:focus {
+  outline: none;
+  border-bottom-color: #333;
+}
+
+/* Set the styles for the search button */
+#search-button {
+  background-color: #ff5722;
+  color: #fff;
+  border: none;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  margin: 15px;
+}
+
+/* Set the styles for the search button when it is hovered */
+#search-button:hover {
+  background-color: #333;
+}
+
+/* Set the flex and alignment styles for the main section */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Set the styles for the map container */
+#map-container {
+  width: 70%;
+  height: 600px;
+  margin: 1rem 0;
+}
+
+/* Set the styles for the results container */
+#results-container {
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 1rem;
+}
