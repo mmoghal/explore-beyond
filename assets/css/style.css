@@ -253,3 +253,223 @@ button[type="submit"]:hover {
   margin: 0;
   padding: 0;
 }
+
+
+.review-list li {
+  margin-bottom: 1rem;
+}
+
+/* Set the styles for the header of each review */
+.review-header {
+  display: flex;
+  align-items: center;
+}
+
+.review-header h4 {
+  font-size: 1.2rem;
+  margin: 0;
+  color: #333;
+}
+
+.review-header img {
+  width: 20px;
+  height: 20px;
+  margin-right: 0.5rem;
+}
+
+.review-header span {
+  font-weight: bold;
+  color: #ff5722;
+}
+
+/* Set the styles for the body of each review */
+.review-body {
+  margin-top: 0.5rem;
+}
+
+.review-body p {
+  margin: 0;
+  color: #333;
+}
+
+/* Set the styles for the modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out, visibility 0s linear 0.2s;
+}
+
+.modal.active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.2s ease-in-out, visibility 0s linear 0s;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 5px;
+  max-width: 600px;
+  text-align: center;
+}
+
+.modal-header h2 {
+  font-size: 1.5rem;
+  margin: 0;
+  color: #333;
+}
+
+/* Sets the font size, margin, and color for the paragraphs in the modal body */
+.modal-body p {
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  color: #333;
+}
+
+/* Sets the display and justification for the modal footer */
+.modal-footer {
+  display: flex;
+  justify-content: center;
+}
+
+/* Sets the background color, font color, border, font size, padding, cursor, and transition for the button in the modal footer */
+.modal-footer button {
+  background-color: #ff5722;
+  color: #fff;
+  border: none;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Sets the background color when the button in the modal footer is hovered over */
+.modal-footer button:hover {
+  background-color: #333;
+}
+
+/* Sets the background and style for footer */
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  background-color: #333;
+  color: #fff;
+  font-weight: 600;
+  margin: 1px;
+}
+
+footer p {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.social-media {
+  display: flex;
+  justify-content: center;
+}
+
+.social-media a {
+  margin: 0 10px;
+  color: #fff;
+  font-size: 20px;
+}
+
+.social-media a:hover {
+  color: #f00;
+}
+
+#confirmation-msg {
+  display: none;
+  position: absolute;
+  bottom: -745px;
+  right: 50%;
+  transform: translateX(50%);
+  padding: 10px;
+  background-color: green;
+  color: white;
+  border-radius: 5px;
+  z-index: 1;
+}
+
+/* Style for personalized services */
+
+#services-container {
+  background-color: #f8f8f8;
+  padding: 4rem;
+  text-align: center;
+}
+
+#services-container h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+#services-container p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+
+#services-container ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+#services-container li {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+#learn-more-btn {
+  background-color: #ff5722;
+  color: #fff;
+  border: none;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+#learn-more-btn:hover {
+  background-color: #333;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 1rem;
+}
+
+#review-form-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Style for the search box to fade in and out every five second. You can adjust the animation */
+#map-search-box {
+  animation: blink 5s linear infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
