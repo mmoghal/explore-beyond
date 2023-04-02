@@ -161,3 +161,46 @@ function displayResults(results, status) {
     }
   }
 }
+
+// Load the Google Maps API
+function loadMapsAPI() {
+    const script = document.createElement("script");
+    script.src =
+      "https://maps.googleapis.com/maps/api/js?key=AIzaSyADJ534OZMnSqGaHgy3zHYwIkKHXiy_1Ig&libraries=places&callback=initMap";
+    script.defer = true;
+    script.async = true;
+    document.head.appendChild(script);
+  }
+  
+  // Wait for the DOM to load before initializing the application
+  document.addEventListener("DOMContentLoaded", function () {
+    loadMapsAPI();
+  });
+  
+  // Listen for submission of comment form
+  const commentForm = document.getElementById("comment-form");
+  commentForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const name = this.querySelector("#name-input").value;
+    const email = this.querySelector("#email-input").value;
+    const message = this.querySelector("#comment-input").value;
+    const comment = {
+      name: name,
+      email: email,
+      message: message,
+    };
+    // Store the comment in local storage
+    const comments = JSON.parse(localStorage.getItem("comments")) || [];
+    comments.push(comment);
+    localStorage.setItem("comments", JSON.stringify(comments));
+  
+    // Show the confirmation message
+    const confirmationMsg = document.getElementById("confirmation-msg");
+    confirmationMsg.style.display = "block";
+    setTimeout(function () {
+      confirmationMsg.style.display = "none";
+    }, 2000);
+  
+    // Clear the form fields
+    this.reset();
+  });
