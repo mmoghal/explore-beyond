@@ -46,9 +46,14 @@ const url = `https://newsapi.org/v2/top-headlines?country=us&category=general&pa
 fetch(url)
   .then((response) => response.json())
   .then((data) => {
-    // Process the data here
+    if (!data || !data.articles || data.articles.length === 0) {
+        // Handle case when no news articles are returned
+        console.log("No news articles found");
+    } else {
+        // Process the data and display the news articles
     console.log(data);
     displayNewsArticles(data.articles);
+    }
   })
   .catch((error) => {
     console.error("Error fetching news data:", error);
@@ -137,13 +142,13 @@ function calculateRoute() {
 
 
 
-  const directionsButton = document.getElementById("directions-button");
-  console.log(directionsButton); // Adding this line to test
-  const directionsContainer = document.getElementById("directions-container");
-  directionsButton.addEventListener("click", function() {
-    console.log("Clicked"); // Adding this line to test
-  directionsContainer.style.display = "block";
-});
+  //const directionsButton = document.getElementById("directions-button");
+  //console.log(directionsButton); // Adding this line to test
+ // const directionsContainer = document.getElementById("directions-container");
+  //directionsButton.addEventListener("click", function() {
+   // console.log("Clicked"); // Adding this line to test
+ // directionsContainer.style.display = "block";
+//});
 
 
 
