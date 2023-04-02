@@ -92,6 +92,32 @@
       </button>
     </section>
 
+      <!-- Form for connecting with us and leaving a comment-->
+      <form id="comment-form">
+        <!--  <h2>Connect with us</h2> -->
+        <div class="form-group">
+          <label for="name-input">Name</label>
+          <input type="text" id="name-input" required />
+        </div>
+        <div class="form-group">
+          <label for="email-input">Email:</label>
+          <input type="email" id="email-input" required />
+        </div>
+        <div class="form-group">
+          <label for="comment-input">Message: </label>
+          <textarea id="comment-input" required></textarea>
+        </div>
+        <div class="form-group">
+          <input type="checkbox" id="create-account-checkbox" />
+          <label for="create-account-checkbox"
+            >Create an account to manage your messages</label
+          >
+        </div>
+        <button type="submit">Send message</button>
+        <div id="confirmation-msg" style="display: none">
+          Your message has been sent!
+        </div>
+      </form>
 
 
 
