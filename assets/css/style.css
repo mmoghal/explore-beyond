@@ -177,3 +177,79 @@ main {
 /*.rating img[src="no-star.png"] {
   content: url(no-star.png);
 }
+
+/* Set the styles for the review form */
+.review-form {
+  margin-top: 1rem;
+}
+
+.review-form h3 {
+  font-size: 1.2rem;
+  margin: 0;
+  color: #333;
+}
+
+.form-group {
+  margin: 1rem 0;
+}
+
+/* Set the styles for all other labels */
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+/* Set the color for email and password for login form */
+label[for="email-inputlogin"],
+label[for="password-input"] {
+  color: #fff;
+}
+
+/* label with the for attribute value of "email-input" and set its text color to the specified RGB value.*/
+label[for="email-input"] {
+  color: rgb(51, 51, 51);
+}
+
+input[type="text"],
+select,
+textarea {
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #ff5722;
+  transition: border-bottom-color 0.2s;
+}
+
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-bottom-color: #333;
+}
+
+/* Set the styles for the submit button in the review form */
+button[type="submit"] {
+  background-color: #ff5722;
+  color: #fff;
+  border: none;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+button[type="submit"]:hover {
+  background-color: #333;
+}
+
+/* Set the styles for the list of reviews */
+.review-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
