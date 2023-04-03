@@ -553,3 +553,8 @@ form.addEventListener('submit', (event) => {
     console.error('Error detecting language:', error);
   });
 });
+
+
+
+
+
