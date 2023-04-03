@@ -12,57 +12,79 @@ Explore Beyond is an all-encompassing tool for exploring new places, planning tr
 
 ## Code Overview
 
-The code consists of several event listeners that wait for user interactions such as form submission, and functions that handle the responses from the APIs.
+The JavaScript code integrates several APIs to create a web application that displays information based on the user's location. It includes event listeners that wait for user interactions such as form submission, and functions that handle responses from the APIs. Here's a summary of what the code does:
 
-The loadMapsAPI() function loads the Google Maps API with a callback to the initMap() function. The initMap() function initializes a new map instance and sets the view to the specified location and zoom level.
+	loadMapsAPI() function loads the Google Maps API with a callback to the initMap() function. 
 
-The commentForm event listener waits for the submission of a comment form, validates the input fields, and stores the comment in local storage. It also displays a confirmation message and clears the form fields after submission.
+	The initMap() function initializes a new map instance and sets the view to the specified location and zoom level.
 
-The loginForm event listener waits for the submission of a login form, validates the input fields, and displays a message based on the correctness of the email and password entered. It also refreshes the page after submission.
+	navigator.geolocation.getCurrentPosition() method gets the user's location and displays a map centered on the user's location.
 
-The socket variable creates a new WebSocket connection to the OpenSky Network API and sends a request to subscribe to the flight data. The getFlightData() function fetches the flight data and updates the markers on the map. It also updates a table with the flight data and calls itself again after a specified time interval.
+	setInterval() method displays the current time on the page and updates it every second.
 
-The form event listener waits for the submission of a form, detects the language of the input text, translates it to the selected language, and displays the translated text.
+	OpenWeatherMap API retrieves current weather information for the user's location and displays it on the page.
 
-This comprehensive web application combines different APIs and functionalities to provide the user with a variety of features, from displaying a map to providing live flight data. It showcases the power of APIs and how they can be used to create dynamic and engaging web applications.
+	News API retrieves the latest news based on the user's location and displays it on the page.
+
+	Google Places Autocomplete enables users to search for places and get directions.
+
+	Retrieve nearby places based on the user's location and selected search type, and display them on the map and in the results container.
+
+	Allow users to leave reviews for the places they visit and store the reviews in local storage. Display the reviews in the place details.
+
+	DOMContentLoaded event listener: This waits for the DOM to finish loading before calling the loadMapsAPI() function.
+
+	commentForm event listener waits for the submission of a comment form, validates the input fields, stores the comment in local storage, displays a confirmation message, and clears the form fields after submission.
+
+	loginForm event listener waits for the submission of a login form, validates the input fields, displays a message based on the correctness of the email and password entered, and reloads the page after one second.
+
+	WebSocket connection creates a new connection with the OpenSky Network API, which provides live flight data. It sends a message to subscribe to state updates, listens for incoming data, and updates the markers on the map with information about each flight.
+
+	getFlightData() function retrieves flight data from the OpenSky Network API by making a fetch request, removes existing markers on the map, adds new markers for each flight in the data, adds a new row to a table displaying information about each flight, and schedules the function to be called again after four hours.
+
+	Google Translate function listens for a form submission event, retrieves the input text, detects the language of the text, translates it to the selected language using the Google Translate API, and displays the translated text on the page.
+
+	form event listener waits for the submission of a form, detects the language of the input text, translates it to the selected language, and displays the translated text.
+
+	Our web application offers an all-encompassing and personalized travel experience, providing users with the latest news and weather updates, nearby places of interest, and live flight data.
+
 
 ## Features
 
-Google Maps API: The Google Maps API is used to initialize and display the map, add markers, and retrieve nearby places based on the user's location and selected search type.
+	Google Maps API - The app uses the Google Maps API to display maps, add markers, and retrieve nearby places based on the user's location and selected search type.
 
-OpenWeatherMap API: The OpenWeatherMap API is used to fetch the weather information for the user's location.
+	OpenWeatherMap API - We fetch weather information from OpenWeatherMap API to provide users with up-to-date weather forecasts for their travel destinations.
 
-News API: The News API is used to get the latest news based on the user's location.
+	News API - The app integrates the News API to provide users with the latest news based on their location.
 
-Google Places API: The Google Places API is used to implement autocomplete for the search box and destination input, and to retrieve place details and reviews.
+	Google Places API - We use the Google Places API to implement autocomplete for the search box and destination input, retrieve place details, and display reviews.
 
-Saving Comments: The app saves comments submitted in a form to local storage.
+	Calculate Route - The app offers a route calculation functionality that helps users plan their travel routes and provides detailed information on distance and estimated travel time.
 
-Login Validation: The app validates a login form and refreshes the page after submission.
+	Live Flight Data - We connect to the OpenSky Network API to receive live flight data and update the markers on the map.
 
-Live Flight Data: The app connects to OpenSky Network API to receive live flight data and updates the markers on the map.
+	Translation Service - The app includes a translation service that allows users to translate input text to the selected language using the Google Translate API.
 
-Translation Functionality: The app translates input text to the selected language using the Google Translate API.
+	Login Validation - The app validates a login form and refreshes the page after submission.
 
-## Technologies Used
 
-.   HTML
+## Technologies
 
-.   CSS
+The app is developed using the following technologies:
 
-.   JavaScript
+	HTML/CSS/JavaScript - The frontend of our app is built using these three core web technologies.
 
-.   OpenWeatherMap API
+	Google Maps API - We use the Google Maps API to display maps, add markers, and retrieve nearby places based on the user's location and selected search type.
 
-.   Google Places API
+	OpenWeatherMap API - We use the OpenWeatherMap API to fetch weather information for user-selected locations.
 
-.   Google Translate API
+	News API - We use the News API to get the latest news based on the user's location.
 
-.   Google Maps API
+	Google Places API - We use the Google Places API to implement autocomplete for the search box and destination input, retrieve place details, and display reviews.
 
-.   News API
+	OpenSky Network API - We connect to the OpenSky Network API to receive live flight data and update the markers on the map.
 
-.   Live Flight Data
+	Google Translate API - We use the Google Translate API to provide translation services for input text.
 
 
 ## Getting Started
