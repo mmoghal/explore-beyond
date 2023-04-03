@@ -1,239 +1,284 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
+  <head>
+    <!-- Meta information -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Explore Beyond</title>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Explore Nearby</title>
-  <link rel="stylesheet" href="./assets/css/style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <script src="https://apis.google.com/js/api.js"></script>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-    integrity="sha384-VzLXTJGPSyTLX6d96AxgkKvE/LRb7ECGyTxuwtpjHnVWVZs2gp5RDjeM/tgBnVdM" crossorigin="">
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-    integrity="sha384-RFZC58YeKApoNsIbBxf4z6JJXmh+geBSgkCQXFyh+4tiFSJmJBt+2FbjxW7Ar16M" crossorigin=""></script>
+    <!-- Link to custom CSS file -->
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <!-- Link to Font Awesome icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Google Maps API script -->
+    <script src="https://apis.google.com/js/api.js"></script>
+
+    <!-- Link to Leaflet CSS file for map display -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha384-VzLXTJGPSyTLX6d96AxgkKvE/LRb7ECGyTxuwtpjHnVWVZs2gp5RDjeM/tgBnVdM"
+      crossorigin=""
+    />
+    <!-- Link to Leaflet JavaScript file for map display -->
+    <script
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha384-RFZC58YeKApoNsIbBxf4z6JJXmh+geBSgkCQXFyh+4tiFSJmJBt+2FbjxW7Ar16M"
+      crossorigin=""
+    ></script>
+
+    <!-- Link to OpenWeatherMap API script for weather data -->
     <script src="https://api.openweathermap.org/data/2.5/weather"></script>
+    <!-- Link to Axios script for making HTTP requests -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://globe.adsbexchange.com/globe.js"></script>
-</head>
+  </head>
 
-<body>
-  <header>
-    <div class="title-wrapper">
-      <h1>Explore Beyond</h1>
-      <p class="title-description">Unleash Your Inner Explorer</p>
-      <div id="time-container"></div>
-      <div id="weather-container"></div>
-    </div>
+  <body>
+    <!-- Header section -->
+    <header>
+      <div class="title-wrapper">
+        <h1>Explore Beyond</h1>
+        <p class="title-description">Unleash Your Inner Explorer</p>
 
-    <!-- Search form for searching nearby places -->
-    <form id="search-form">
-      <!-- <input type="text" id="search-input" placeholder="Search for places" />  -->
-      <select id="search-type">
-        <option value="restaurant">Restaurants</option>
-        <option value="parks">Parks</option>
-        <option value="attractions">Attractions</option>
-        <option value="hotels">Hotels</option>
-        <!--Add more search types as needed-->
-      </select>
-      <button type="submit" id="search-button">Search</button>
-    </form>
+        <!-- Container for displaying current time -->
+        <div id="time-container"></div>
 
-
-
-
-
-
-    <!-- User login option -->
-    <form id="login-form">
-      <div>
-        <label for="email-inputlogin">Email:</label>
-        <input type="email" id="email-input" required placeholder="example@example.com" />
+        <!-- Container for displaying current weather -->
+        <div id="weather-container"></div>
       </div>
-      <div>
-        <label for="password-input">Password:</label>
-        <input type="password" id="password-input" required placeholder="password" />
-      </div>
-      <button type="submit">Log In</button>
-    </form>
-  </header>
 
-  <div id="welcome-message"></div>
+      <!-- Search form for searching nearby places -->
+      <form id="search-form">
+        <!-- <input type="text" id="search-input" placeholder="Search for places" /> future code -->
 
-  <input type="text" id="map-search-box" placeholder="Search for a place or address" />
-  <input type="text" id="destination" name="destination" placeholder="Enter your destination" required>
-  <button id="calculate-route" type="submit">Calculate Route</button>
-  <!-- <div id="directions-container" style="display:block;">
-      <button id="directions-button" type="submit">Directions</button>
-    </div> -->
-
-
-  <main>
-    <!-- Container for the map, weather and date and time display -->
-    <div id="map-container"></div>
-    <!-- Container for displaying search results -->
-    <div id="results-container"></div>
-    <!-- Container for leaving reviews -->
-    <div id="review-form-container">
-      <!-- Container for personalized services -->
-      <section id="services-container">
-        <h2>Personalized Services</h2>
-        <p>
-          Our team is dedicated to providing you with the best possible
-          experience. That's why we offer personalized services tailored to
-          your individual needs. Whether you're planning a romantic getaway or
-          a family vacation, we have the expertise and resources to make your
-          trip unforgettable.
-        </p>
-        <ul>
-          <li>Customized travel itineraries</li>
-          <li>Personalized tour packages</li>
-          <li>Exclusive access to top-rated attractions</li>
-          <li>Dedicated customer support</li>
-        </ul>
-        <button id="learn-more-btn">
-          Connect with us to explore further
-        </button>
-      </section> 
-      <!-- Form for connecting with us and leaving a comment-->
-      <form id="comment-form">
-        <!--  <h2>Connect with us</h2> -->
-        <div class="form-group">
-          <label for="name-input">Name</label>
-          <input type="text" id="name-input" required />
-        </div>
-        <div class="form-group">
-          <label for="email-input">Email:</label>
-          <input type="email" id="email-input" required />
-        </div>
-        <div class="form-group">
-          <label for="comment-input">Message: </label>
-          <textarea id="comment-input" required></textarea>
-        </div>
-        <div class="form-group">
-          <input type="checkbox" id="create-account-checkbox" />
-          <label for="create-account-checkbox">Create an account to manage your messages</label>
-        </div>
-        <button type="submit">Send message</button>
-        <div id="confirmation-msg" style="display: none">
-          Your message has been sent!
-        </div>
+        <!-- Dropdown list of search types -->
+        <select id="search-type">
+          <option value="restaurant">Restaurants</option>
+          <option value="parks">Parks</option>
+          <option value="attractions">Attractions</option>
+          <option value="hotels">Hotels</option>
+          <!--Add more search types as needed-->
+        </select>
+        <!-- Submit button for the search form -->
+        <button type="submit" id="search-button">Search</button>
       </form>
 
-      <!-- Modal for displaying review submission success message -->
-      <div id="modal" class="modal">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h2>Thank you for your review!</h2>
-          </div>
-          <div class="modal-body">
-            <p>Your review has been submitted successfully.</p>
-          </div>
-          <div class="modal-footer">
-            <button id="modal-close-btn" class="modal-close-btn">
-              Close
-            </button>
-          </div>
+      <!-- User login form -->
+      <form id="login-form">
+        <div>
+          <label for="email-inputlogin">Email:</label>
+          <input
+            type="email"
+            id="email-input"
+            required
+            placeholder="example@example.com"
+          />
         </div>
-      </div>
-
-
-      <!-- Flight data table -->
-      <!-- Map section -->
-      <section id="map-section">
-        <div id="mapid"></div>
-      </section>
-
-      <!-- Flight data table section -->
-
-      <section id="flight-data-section">
-        <div id="flight-data">
-          <h2>Live Flight Data</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Flight Number</th>
-                <th>Departure Airport</th>
-                <th>Destination Airport</th>
-                <th>Altitude</th>
-                <th>Speed</th>
-                <th>Heading</th>
-              </tr>
-            </thead>
-            <tbody id="flight-data-body">
-            </tbody>
-          </table>
+        <div>
+          <label for="password-input">Password:</label>
+          <input
+            type="password"
+            id="password-input"
+            required
+            placeholder="password"
+          />
         </div>
-      </section>
+        <button type="submit">Log In</button>
+      </form>
+    </header>
 
+    <!-- Welcome message displayed after successful login -->
+    <div id="welcome-message"></div>
 
-      <!-- Google Translate table section -->
+    <!-- Search box for searching for a place or address on the map -->
+    <input
+      type="text"
+      id="map-search-box"
+      placeholder="Search for a place or address"
+    />
+    <!-- Input box for entering destination address for route calculation -->
+    <input
+      type="text"
+      id="destination"
+      name="destination"
+      placeholder="Enter your destination"
+      required
+    />
+    <!-- Button for calculating and displaying route on the map -->
+    <button id="calculate-route" type="submit">Calculate Route</button>
+    <!-- <div id="directions-container" style="display:block;">
+      <button id="directions-button" type="submit">Directions</button>
+    </div> Directions container future code -->
 
-      <section id="translate-section">
-        <h2>Translate</h2>
-        <form>
-          <label for="translate-input">Text to translate:</label>
-          <input type="text" id="translate-input" name="translate-input" required>
-          <label for="translate-language">Target language:</label>
-          <select id="translate-language" name="translate-language" required>
-            <option value="">Select a language</option>
-            <option value="en">English</option>
-            <option value="es">Spanish</option>
-            <option value="fr">French</option>
-            <option value="de">German</option>
-            <option value="it">Italian</option>
-            <option value="ja">Japanese</option>
-            <option value="ko">Korean</option>
-            <option value="pt">Portuguese</option>
-            <option value="ru">Russian</option>
-            <option value="zh-CN">Simplified Chinese</option>
-            <option value="zh-TW">Traditional Chinese</option>
-          </select>
-          <button type="submit">Translate</button>
+    <main>
+      <!-- Container for the map, weather and date and time display -->
+      <div id="map-container"></div>
+      <!-- Container for displaying search results -->
+      <div id="results-container"></div>
+      <!-- Container for leaving reviews -->
+      <div id="review-form-container">
+        <!-- Container for personalized services -->
+        <section id="services-container">
+          <h2>Personalized Services</h2>
+          <p>
+            Our team is dedicated to providing you with the best possible
+            experience. That's why we offer personalized services tailored to
+            your individual needs. Whether you're planning a romantic getaway or
+            a family vacation, we have the expertise and resources to make your
+            trip unforgettable.
+          </p>
+          <ul>
+            <li>Customized travel itineraries</li>
+            <li>Personalized tour packages</li>
+            <li>Exclusive access to top-rated attractions</li>
+            <li>Dedicated customer support</li>
+          </ul>
+          <button id="learn-more-btn">
+            Connect with us to explore further
+          </button>
+        </section>
+        <!-- Form for connecting with us and leaving a comment-->
+        <form id="comment-form">
+          <!--  <h2>Connect with us</h2> -->
+          <div class="form-group">
+            <label for="name-input">Name</label>
+            <input type="text" id="name-input" required />
+          </div>
+          <div class="form-group">
+            <label for="email-input">Email:</label>
+            <input type="email" id="email-input" required />
+          </div>
+          <div class="form-group">
+            <label for="comment-input">Message: </label>
+            <textarea id="comment-input" required></textarea>
+          </div>
+          <div class="form-group">
+            <input type="checkbox" id="create-account-checkbox" />
+            <label for="create-account-checkbox"
+              >Create an account to manage your messages</label
+            >
+          </div>
+          <button type="submit">Send message</button>
+          <div id="confirmation-msg" style="display: none">
+            Your message has been sent!
+          </div>
         </form>
-        <div id="translation"></div>
-      </section>
 
-    </div>
+        <!-- Modal for displaying review submission success message -->
+        <div id="modal" class="modal">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2>Thank you for your review!</h2>
+            </div>
+            <div class="modal-body">
+              <p>Your review has been submitted successfully.</p>
+            </div>
+            <div class="modal-footer">
+              <button id="modal-close-btn" class="modal-close-btn">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
 
-  </main>
+        <!-- Flight data table -->
+        <!-- Map section -->
+        <section id="map-section">
+          <div id="mapid"></div>
+        </section>
 
-  
+        <!-- Flight data table section -->
 
-  <!-- News articles section -->
+        <section id="flight-data-section">
+          <div id="flight-data">
+            <h2>Live Flight Data</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Flight Number</th>
+                  <th>Departure Airport</th>
+                  <th>Destination Airport</th>
+                  <th>Altitude</th>
+                  <th>Speed</th>
+                  <th>Heading</th>
+                </tr>
+              </thead>
+              <tbody id="flight-data-body"></tbody>
+            </table>
+          </div>
+        </section>
 
-  <section id="news-section">
-    <h2>Latest News</h2>
-    <div id="news-container">
-      <div class="loader"></div>
-    </div>
-  </section>
+        <!-- Google Translate table section -->
 
-  <!-- Footer section -->
-  <footer>
-    <p>
-      &copy; Explore Beyond 2023 | A passion for exploration and discovery
-      drives us to seek out new adventures and experiences. Join us on our
-      journey.
-    </p>
-    <div class="social-media">
-      <a href="#"><i class="fab fa-facebook-f"></i></a>
-      <a href="#"><i class="fab fa-twitter"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
-    </div>
-  </footer>
+        <section id="translate-section">
+          <h2>Translate</h2>
+          <form>
+            <label for="translate-input">Text to translate:</label>
+            <input
+              type="text"
+              id="translate-input"
+              name="translate-input"
+              required
+            />
+            <label for="translate-language">Target language:</label>
+            <select id="translate-language" name="translate-language" required>
+              <option value="">Select a language</option>
+              <option value="en">English</option>
+              <option value="es">Spanish</option>
+              <option value="fr">French</option>
+              <option value="de">German</option>
+              <option value="it">Italian</option>
+              <option value="ja">Japanese</option>
+              <option value="ko">Korean</option>
+              <option value="pt">Portuguese</option>
+              <option value="ru">Russian</option>
+              <option value="zh-CN">Simplified Chinese</option>
+              <option value="zh-TW">Traditional Chinese</option>
+            </select>
+            <button type="submit">Translate</button>
+          </form>
+          <div id="translation"></div>
+        </section>
+      </div>
+    </main>
 
+    <!-- News articles section -->
 
-  <!-- Footer section -->
-  <footer>
-    <p>
-      Designed and developed with
-      <i style="color: red" class="fas fa-heart"></i> by Our Team | &copy;
-      Explore Beyond 2023
-    </p>
-  </footer>
+    <section id="news-section">
+      <h2>Latest News</h2>
+      <div id="news-container">
+        <div class="loader"></div>
+      </div>
+    </section>
 
-  <!--
+    <!-- Footer section -->
+    <footer>
+      <p>
+        &copy; Explore Beyond 2023 | A passion for exploration and discovery
+        drives us to seek out new adventures and experiences. Join us on our
+        journey.
+      </p>
+      <div class="social-media">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </footer>
+
+    <!-- Footer section -->
+    <footer>
+      <p>
+        Designed and developed with
+        <i style="color: red" class="fas fa-heart"></i> by Our Team | &copy;
+        Explore Beyond 2023
+      </p>
+    </footer>
+
+    <!--
     <div id="directions-container">
       <form id="directions-form">
         <label for="start-input">Starting Point:</label>
@@ -247,16 +292,11 @@
     
       <div id="map"></div>
       <div id="distance"></div>
-    </div> -->
+    </div> future code-->
 
-
-
-
-
-  <!-- Load the Google Maps API and other necessary scripts -->
-  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-  <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
-  <script src="./assets/scripts/script.js"></script>
-</body>
-
+    <!-- Load the Google Maps API and other necessary scripts -->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+    <script src="./assets/scripts/script.js"></script>
+  </body>
 </html>

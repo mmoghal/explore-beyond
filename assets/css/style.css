@@ -1,77 +1,77 @@
 /* Set the font and margin/padding for the entire body */
 body {
-    font-family: "Helvetica Neue", sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Set the font weight and margin for all heading tags */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-weight: bold;
-    margin: 0;
-    font-size: 2rem;
-  }
-  
-    /* Set the margin bottom and text align-center Live Flight Data Heading */
-  h2 {
-    margin-bottom: 2rem;
-    text-align: center;
-    margin-top: 1rem;
-  }
+  font-family: "Helvetica Neue", sans-serif;
+  margin: 0;
+  padding: 0;
+}
 
-  /* Set the styles for the header section */
-  header {
-    background-color: #333;
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-  }
+/* Set the font weight and margin for all heading tags */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+  margin: 0;
+  font-size: 2rem;
+}
 
- /* #time-container {
+/* Set the margin bottom and text align-center Live Flight Data Heading */
+h2 {
+  margin-bottom: 2rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* Set the styles for the header section */
+header {
+  background-color: #333;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+/* #time-container {
 
 } */
 
 #weather-container {
-margin-top: 10px;
+  margin-top: 10px;
 }
 
-  /* Style for the title for our webpage */
+/* Style for the title for our webpage */
 
 .title-wrapper {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  
-  .title-description {
-    color: #ff5722;
-    font-style: italic;
-    font-weight: 600;
-  }
-  
-  /* Set the font size for the main heading */
-  header h1 {
-    font-size: 2rem;
-  }
-  
-  /* Set the styles for the search form */
-  #search-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 2rem;
-  }
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
 
-  /* Set the styles for the search input field */
+.title-description {
+  color: #ff5722;
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* Set the font size for the main heading */
+header h1 {
+  font-size: 2rem;
+}
+
+/* Set the styles for the search form */
+#search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+/* Set the styles for the search input field */
 #search-input {
   font-size: 1.2rem;
   padding: 0.5rem;
@@ -269,7 +269,6 @@ button[type="submit"]:hover {
   margin: 0;
   padding: 0;
 }
-
 
 .review-list li {
   margin-bottom: 1rem;
@@ -491,8 +490,6 @@ footer p {
   }
 }*/
 
-
-
 /* Style for Latest News */
 #news-section {
   margin-top: 2rem;
@@ -562,8 +559,6 @@ footer p {
   }
 }
 
-
-
 /*#directions-button {
   padding: 10px;
   background-color: #008CBA;
@@ -572,8 +567,6 @@ footer p {
   border-radius: 5px;
   cursor: pointer;
 }*/
-
-
 
 /* Style for Live Flight Data */
 #mapid {
@@ -588,7 +581,8 @@ table {
   margin: 0 auto;
 }
 
-th, td {
+th,
+td {
   text-align: center;
   padding: 12px;
   font-weight: bold;
@@ -619,10 +613,7 @@ tbody tr:nth-child(even) {
   z-index: 1;
 }
 
-
-
 /* Style for Google Translate */
-
 
 #translate-section form {
   display: flex;
@@ -634,5 +625,3 @@ tbody tr:nth-child(even) {
   margin-top: 1em;
   font-weight: bold;
 }
-
-
