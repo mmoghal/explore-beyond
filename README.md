@@ -2,7 +2,7 @@
 
 Explore Beyond is a web application that lets users explore the world beyond their immediate surroundings. It combines several APIs and functionalities to provide an all-encompassing experience.
 
-## Description and Code Overview
+## Code Overview
 
 The code consists of several event listeners that wait for user interactions such as form submission, and functions that handle the responses from the APIs.
 
