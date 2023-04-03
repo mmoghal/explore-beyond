@@ -12,7 +12,9 @@
     integrity="sha384-VzLXTJGPSyTLX6d96AxgkKvE/LRb7ECGyTxuwtpjHnVWVZs2gp5RDjeM/tgBnVdM" crossorigin="">
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha384-RFZC58YeKApoNsIbBxf4z6JJXmh+geBSgkCQXFyh+4tiFSJmJBt+2FbjxW7Ar16M" crossorigin=""></script>
-
+    <script src="https://api.openweathermap.org/data/2.5/weather"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://globe.adsbexchange.com/globe.js"></script>
 </head>
 
 <body>
@@ -92,7 +94,7 @@
         <button id="learn-more-btn">
           Connect with us to explore further
         </button>
-      </section>
+      </section> 
       <!-- Form for connecting with us and leaving a comment-->
       <form id="comment-form">
         <!--  <h2>Connect with us</h2> -->
@@ -165,6 +167,34 @@
       </section>
 
 
+      <!-- Google Translate table section -->
+
+      <section id="translate-section">
+        <h2>Translate</h2>
+        <form>
+          <label for="translate-input">Text to translate:</label>
+          <input type="text" id="translate-input" name="translate-input" required>
+          <label for="translate-language">Target language:</label>
+          <select id="translate-language" name="translate-language" required>
+            <option value="">Select a language</option>
+            <option value="en">English</option>
+            <option value="es">Spanish</option>
+            <option value="fr">French</option>
+            <option value="de">German</option>
+            <option value="it">Italian</option>
+            <option value="ja">Japanese</option>
+            <option value="ko">Korean</option>
+            <option value="pt">Portuguese</option>
+            <option value="ru">Russian</option>
+            <option value="zh-CN">Simplified Chinese</option>
+            <option value="zh-TW">Traditional Chinese</option>
+          </select>
+          <button type="submit">Translate</button>
+        </form>
+        <div id="translation"></div>
+      </section>
+      
+      
 
 
     </div>
@@ -229,7 +259,6 @@
   <!-- Load the Google Maps API and other necessary scripts -->
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
-  <script src="https://api.openweathermap.org/data/2.5/weather"></script>
   <script src="./assets/scripts/script.js"></script>
 </body>
 

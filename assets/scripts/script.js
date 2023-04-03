@@ -437,6 +437,7 @@ socket.addEventListener('message', (event) => {
   }
 });
 
+
 // Live flight data
 var mymap = L.map('mapid').setView([51.505, -0.09], 13);
 
@@ -445,27 +446,110 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 18,
 }).addTo(mymap);
 
-fetch('https://opensky-network.org/api/states/all')
-  .then(response => response.json())
-  .then(data => {
-    data.states.forEach(state => {
-      if (state !== null) { // add null/undefined check
-        var marker = L.marker([state[6], state[5]]).addTo(mymap);
-        marker.bindPopup(`<b>${state[1]}</b><br>Altitude: ${state[7]}<br>Speed: ${state[9]}<br>Heading: ${state[10]}`);
-      }
+// Function to get flight data and update markers on the map
+function getFlightData() {
+  fetch('https://opensky-network.org/api/states/all')
+    .then(response => response.json())
+    .then(data => {
+      // Remove all existing markers
+      mymap.eachLayer(function (layer) {
+        if (layer instanceof L.Marker) {
+          mymap.removeLayer(layer);
+        }
+      });
+      
+      // Add new markers for each flight
+      data.states.forEach(state => {
+        if (state !== null) { // add null/undefined check
+          var marker = L.marker([state[6], state[5]]).addTo(mymap);
+          marker.bindPopup(`<b>${state[1]}</b><br>Altitude: ${state[7]}<br>Speed: ${state[9]}<br>Heading: ${state[10]}`);
+        }
 
-      var flightDataRow = document.createElement('tr');
-      flightDataRow.innerHTML = `
-        <td>${state[1]}</td>
-        <td>${state[2]}</td>
-        <td>${state[4]}</td>
-        <td>${state[7]}</td>
-        <td>${state[9]}</td>
-        <td>${state[10]}</td>
-      `;
+        var flightDataRow = document.createElement('tr');
+        flightDataRow.innerHTML = `
+          <td>${state[1]}</td>
+          <td>${state[2]}</td>
+          <td>${state[4]}</td>
+          <td>${state[7]}</td>
+          <td>${state[9]}</td>
+          <td>${state[10]}</td>
+        `;
 
-      document.getElementById('flight-data-body').appendChild(flightDataRow);
+        document.getElementById('flight-data-body').appendChild(flightDataRow);
+      });
+      
+      // Call the function again after 10 seconds
+      setTimeout(getFlightData, 10000);
+    })
+    .catch(error => console.error('Error fetching flight data:', error));
+}
+
+// Call the function to start getting flight data
+getFlightData();
+
+
+
+
+
+
+
+// Google Translate function https://rapidapi.com/googlecloud/api/google-translate1/
+
+const apiKey = '1026af66aemsh9e3509bb409a9f6p172636jsn9b110786c0c4';
+const form = document.querySelector('#translate-section form');
+const input = document.querySelector('#translate-input');
+const select = document.querySelector('#translate-language');
+const output = document.querySelector('#translation');
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault(); // prevent form submission
+
+  const inputText = input.value;
+
+  // Detect the language of the input text 
+  const detectOptions = {
+    method: 'POST',
+    url: 'https://google-translate1.p.rapidapi.com/language/translate/v2/detect',
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded',
+      'Accept-Encoding': 'application/gzip',
+      'X-RapidAPI-Key': apiKey,
+      'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
+    },
+    data: new URLSearchParams({
+      q: inputText
+    })
+  };
+
+  axios.request(detectOptions).then(function (response) {
+    const sourceLanguage = response.data.data.detections[0][0].language;
+    const targetLanguage = select.value;
+
+    // Translate the input text to the selected language
+    const translateOptions = {
+      method: 'POST',
+      url: 'https://google-translate1.p.rapidapi.com/language/translate/v2',
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'Accept-Encoding': 'application/gzip',
+        'X-RapidAPI-Key': apiKey,
+        'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
+      },
+      data: new URLSearchParams({
+        q: inputText,
+        source: sourceLanguage,
+        target: targetLanguage
+      })
+    };
+
+    axios.request(translateOptions).then(function (response) {
+      const translatedText = response.data.data.translations[0].translatedText;
+      output.textContent = translatedText; // display translated text
+    }).catch(function (error) {
+      console.error('Error translating text:', error);
     });
-  })
-  .catch(error => console.error('Error fetching flight data:', error));
 
+  }).catch(function (error) {
+    console.error('Error detecting language:', error);
+  });
+});
