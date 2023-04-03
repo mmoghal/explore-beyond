@@ -403,3 +403,69 @@ loginForm.addEventListener("submit", (event) => {
 
 
 
+
+
+
+
+
+
+// Create a new web socket connection
+const socket = new WebSocket('wss://opensky-network.org/api/states/all');
+
+// When the connection is established, send a message to request flight data
+socket.addEventListener('open', (event) => {
+  socket.send(JSON.stringify({
+    "action": "subscribe",
+    "params": {
+      "type": "states"
+    }
+  }));
+});
+
+// When a message is received from the server, update the markers on the map
+socket.addEventListener('message', (event) => {
+  const data = JSON.parse(event.data);
+  if (data.states) {
+    data.states.forEach(state => {
+      if (state !== null) {
+        // Update the marker position on the map
+        const marker = L.marker([state[6], state[5]]);
+        marker.bindPopup(`<b>${state[1]}</b><br>Altitude: ${state[7]}<br>Speed: ${state[9]}<br>Heading: ${state[10]}`);
+        marker.addTo(mymap);
+      }
+    });
+  }
+});
+
+// Live flight data
+var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+  maxZoom: 18,
+}).addTo(mymap);
+
+fetch('https://opensky-network.org/api/states/all')
+  .then(response => response.json())
+  .then(data => {
+    data.states.forEach(state => {
+      if (state !== null) { // add null/undefined check
+        var marker = L.marker([state[6], state[5]]).addTo(mymap);
+        marker.bindPopup(`<b>${state[1]}</b><br>Altitude: ${state[7]}<br>Speed: ${state[9]}<br>Heading: ${state[10]}`);
+      }
+
+      var flightDataRow = document.createElement('tr');
+      flightDataRow.innerHTML = `
+        <td>${state[1]}</td>
+        <td>${state[2]}</td>
+        <td>${state[4]}</td>
+        <td>${state[7]}</td>
+        <td>${state[9]}</td>
+        <td>${state[10]}</td>
+      `;
+
+      document.getElementById('flight-data-body').appendChild(flightDataRow);
+    });
+  })
+  .catch(error => console.error('Error fetching flight data:', error));
+

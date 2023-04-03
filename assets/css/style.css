@@ -14,8 +14,15 @@ body {
   h6 {
     font-weight: bold;
     margin: 0;
+    font-size: 2rem;
   }
   
+    /* Set the margin bottom and text align-center Live Flight Data Heading */
+  h2 {
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
   /* Set the styles for the header section */
   header {
     background-color: #333;
@@ -107,7 +114,7 @@ main {
 
 /* Set the styles for the map container */
 #map-container {
-  width: 70%;
+  width: 60%;
   height: 400px;
   margin: 1rem 0;
 }
@@ -375,7 +382,7 @@ footer {
   height: 80px;
   background-color: #333;
   color: #fff;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 footer p {
@@ -484,6 +491,8 @@ footer p {
 }*/
 
 
+
+/* Style for Latest News */
 #news-section {
   margin-top: 2rem;
   text-align: center;
@@ -554,11 +563,6 @@ footer p {
 
 
 
-
-
-
-
-
 /*#directions-button {
   padding: 10px;
   background-color: #008CBA;
@@ -567,5 +571,52 @@ footer p {
   border-radius: 5px;
   cursor: pointer;
 }*/
+
+
+
+/* Style for Live Flight Data */
+#mapid {
+  width: 100%;
+  height: 400px;
+  margin: 1rem 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0 auto;
+}
+
+th, td {
+  text-align: center;
+  padding: 12px;
+  font-weight: bold;
+}
+
+thead {
+  background-color: #22edff;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#flight-data {
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+#flight-data table {
+  position: relative;
+  width: 100%;
+}
+
+#flight-data thead {
+  position: sticky;
+  top: 0;
+  background-color: #22edff;
+  z-index: 1;
+}
+
 
 
