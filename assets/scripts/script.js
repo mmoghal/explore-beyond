@@ -453,8 +453,8 @@ function getFlightData() {
         document.getElementById("flight-data-body").appendChild(flightDataRow);
       });
 
-      // Call the function again after 100 seconds
-      setTimeout(getFlightData, 100000);
+      // Call the function again after 4 hours
+      setTimeout(getFlightData, 14400000);
     })
     .catch((error) => console.error("Error fetching flight data:", error));
 }
