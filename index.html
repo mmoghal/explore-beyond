@@ -255,6 +255,26 @@
       </div>
     </section>
 
+    <!-- Check Weather section -->
+
+    <section id="weather-section">
+      <h2>Check Weather</h2>
+      <div id="weather-search-container">
+        <h1 id="temp"></h1>
+        <p id="desc"></p>
+      </div>
+      <form id="weather-form">
+        <input 
+          id="zip" 
+          type="number" 
+          placeholder="Please Enter a valid Zip Code"
+          pattern="^\d{5}(?:[-\s]\d{4})?$"
+        >
+        <button type="weather-search">Search</button>
+      </form>
+    </section>
+    
+
     <!-- Footer section -->
     <footer>
       <p>
