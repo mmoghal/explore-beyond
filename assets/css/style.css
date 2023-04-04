@@ -125,6 +125,8 @@ main {
   width: 100%;
   max-width: 800px;
   margin-bottom: 4rem;
+  max-height: 400px; /* Set the maximum height of the container */
+  overflow-y: auto; /* Add vertical scroll if the content exceeds the container height */
 }
 
 /* Set the styles for the individual result containers */

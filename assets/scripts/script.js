@@ -410,7 +410,25 @@ socket.addEventListener("message", (event) => {
 });
 
 // Live flight data
-var mymap = L.map("mapid").setView([51.505, -0.09], 13);
+var mymap = L.map("mapid");
+
+// Get user's current location
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(function (position) {
+    // Set the view of the map to the user's current location
+    mymap.setView(
+      [position.coords.latitude, position.coords.longitude],
+      13
+    );
+
+    // Add a marker for the user's location
+    L.marker([position.coords.latitude, position.coords.longitude])
+      .addTo(mymap)
+      .bindPopup("You are here.");
+  });
+} else {
+  alert("Geolocation is not supported by this browser.");
+}
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
