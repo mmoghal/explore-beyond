@@ -125,7 +125,7 @@ main {
   width: 100%;
   max-width: 800px;
   margin-bottom: 4rem;
-  max-height: 400px; /* Set the maximum height of the container */
+  max-height: 600px; /* Set the maximum height of the container */
   overflow-y: auto; /* Add vertical scroll if the content exceeds the container height */
 }
 
@@ -191,6 +191,11 @@ main {
   margin-right: 5px;
   content: url(star1.png);
 }
+
+.rating img[src="star1.png"] {
+  content: url(star1.png);
+}
+
 
 .rating img[src="star1.png"] {
   content: url(star1.png);
@@ -298,7 +303,6 @@ button[type="submit"]:hover {
   font-weight: bold;
   color: #ff5722;
 }
-
 
 .review-list .review-header img {
   height: 16px;
