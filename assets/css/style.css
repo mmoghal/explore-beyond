@@ -189,11 +189,11 @@ main {
   height: 16px;
   width: 16px;
   margin-right: 5px;
-  content: url(star.png);
+  content: url(star1.png);
 }
 
-/*.rating img[src="no-star.png"] {
-  content: url(no-star.png);
+.rating img[src="star1.png"] {
+  content: url(star1.png);
 }
 
 /* Set the styles for the review form */
@@ -297,6 +297,18 @@ button[type="submit"]:hover {
 .review-header span {
   font-weight: bold;
   color: #ff5722;
+}
+
+
+.review-list .review-header img {
+  height: 16px;
+  width: 16px;
+  margin-right: 5px;
+  content: url(star1.png);
+}
+
+.review-list .review-header img[src="no-star.png"] {
+  content: url(no-star.png);
 }
 
 /* Set the styles for the body of each review */

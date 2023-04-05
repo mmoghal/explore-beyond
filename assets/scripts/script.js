@@ -210,107 +210,115 @@ searchButton.addEventListener("click", function (event) {
 
 // Display the search results on the map and in the results container
 function displayResults(results, status) {
-  if (status === google.maps.places.PlacesServiceStatus.OK) {
-    const resultsContainer = document.getElementById("results-container");
-    resultsContainer.innerHTML = "";
-    // Keep track of the markers added to the map
-    const markers = [];
-    for (let i = 0; i < results.length; i++) {
-      const place = results[i];
-      // Add a marker for each place
-      const placeMarker = new google.maps.Marker({
-        position: place.geometry.location,
-        map: map,
-        title: place.name,
-      });
-      // Add the marker to the markers array
-      markers.push(placeMarker);
-      // Add place details and review form to the results container
-      const resultDiv = document.createElement("div");
-      resultDiv.classList.add("result");
-      resultDiv.innerHTML = `
-        <h2>${place.name}</h2>
-        <p>${place.vicinity}</p>
-        <div class="rating">
-          <img src="${place.rating ? "star.png" : "no-star.png"}" alt="star" />
-          <span>${place.rating ? place.rating.toFixed(1) : "N/A"}</span>
-        </div>
-        <a href="${place.website}" target="_blank">${place.website}</a>
-        <form class="review-form">
-          <h3>Leave a review</h3>
-          <div class="form-group">
-            <label for="name-input">Name:</label>
-            <input type="text" id="name-input" required />
-          </div>
-          <div class="form-group">
-            <label for="rating-input">Rating:</label>
-            <select id="rating-input" required>
-              <option value="">Select a rating</option>
-              <option value="5">5 stars</option>
-              <option value="4">4 stars</option>
-              <option value="3">3 stars</option>
-              <option value="2">2 stars</option>
-              <option value="1">1 star</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="comment-input">Comment:</label>
-            <textarea id="comment-input" required></textarea>
-          </div>
-          <button type="submit">Submit review</button>
-        </form>
-        <ul class="review-list"></ul>
-      `;
-      resultsContainer.appendChild(resultDiv);
-      // Listen for submission of review form
-      const reviewForm = resultDiv.querySelector(".review-form");
-      reviewForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-        const name = this.querySelector("#name-input").value;
-        const rating = this.querySelector("#rating-input").value;
-        const comment = this.querySelector("#comment-input").value;
-        const review = {
-          name: name,
-          rating: rating,
-          comment: comment,
-        };
-        // Store the review in local storage
-        const reviews = JSON.parse(localStorage.getItem("reviews")) || {};
-        const placeId = place.place_id;
-        if (!reviews[placeId]) {
-          reviews[placeId] = [];
-        }
-        reviews[placeId].push(review);
-        localStorage.setItem("reviews", JSON.stringify(reviews));
-
-        // Show the modal when the review is submitted
-        const modal = document.getElementById("modal");
-        const modalCloseBtn = document.getElementById("modal-close-btn");
-        modal.classList.add("active");
-        modalCloseBtn.addEventListener("click", function () {
-          modal.classList.remove("active");
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      const resultsContainer = document.getElementById("results-container");
+      resultsContainer.innerHTML = "";
+      // Keep track of the markers added to the map
+      const markers = [];
+      for (let i = 0; i < results.length; i++) {
+        const place = results[i];
+        // Add a marker for each place
+        const placeMarker = new google.maps.Marker({
+          position: place.geometry.location,
+          map: map,
+          title: place.name,
         });
-
-        // Display the review in the place details
-        const reviewList = resultDiv.querySelector(".review-list");
-        const newReview = document.createElement("li");
-        newReview.innerHTML = `
-            <div class="review-header">
-              <h4>${name}</h4>
-              <img src="${
-                rating > 0 ? "star.png" : "no-star.png"
-              }" alt="star" />
-              <span>${rating > 0 ? rating + " stars" : "N/A"}</span>
+        // Add the marker to the markers array
+        markers.push(placeMarker);
+        // Add place details and review form to the results container
+        const resultDiv = document.createElement("div");
+        resultDiv.classList.add("result");
+        resultDiv.innerHTML = `
+          <h2>${place.name}</h2>
+          <p>${place.vicinity}</p>
+          <div class="rating">
+            <img src="${place.rating ? "star1.png" : "no-star.png"}" alt="star" />
+            <span>${place.rating ? place.rating.toFixed(1) : "N/A"}</span>
+          </div>
+          <a class="result-website" target="_blank"></a>
+          <form class="review-form">
+            <h3>Leave a review</h3>
+            <div class="form-group">
+              <label for="name-input">Name:</label>
+              <input type="text" id="name-input" required />
             </div>
-            <div class="review-body">
-              <p>${comment}</p>
+            <div class="form-group">
+              <label for="rating-input">Rating:</label>
+              <select id="rating-input" required>
+                <option value="">Select a rating</option>
+                <option value="5">5 stars</option>
+                <option value="4">4 stars</option>
+                <option value="3">3 stars</option>
+                <option value="2">2 stars</option>
+                <option value="1">1 star</option>
+              </select>
             </div>
-          `;
-        reviewList.appendChild(newReview);
-      });
+            <div class="form-group">
+              <label for="comment-input">Comment:</label>
+              <textarea id="comment-input" required></textarea>
+            </div>
+            <button type="submit">Submit review</button>
+          </form>
+          <ul class="review-list"></ul>
+        `;
+   // Update the websiteEl element
+   const websiteEl = resultDiv.querySelector('.result-website');
+   if (place.website) {
+     websiteEl.href = place.website;
+     websiteEl.textContent = place.website;
+   } else {
+     websiteEl.style.display = 'none';
+   }
+        resultsContainer.appendChild(resultDiv);
+       // Listen for submission of review form
+       const reviewForm = resultDiv.querySelector(".review-form");
+       reviewForm.addEventListener("submit", function (event) {
+         event.preventDefault();
+         const name = this.querySelector("#name-input").value;
+         const rating = this.querySelector("#rating-input").value;
+         const comment = this.querySelector("#comment-input").value;
+         const review = {
+           name: name,
+           rating: rating,
+           comment: comment,
+         };
+          // Store the review in local storage
+          const reviews = JSON.parse(localStorage.getItem("reviews")) || {};
+          const placeId = place.place_id;
+          if (!reviews[placeId]) {
+            reviews[placeId] = [];
+          }
+          reviews[placeId].push(review);
+          localStorage.setItem("reviews", JSON.stringify(reviews));
+  
+          // Show the modal when the review is submitted
+          const modal = document.getElementById("modal");
+          const modalCloseBtn = document.getElementById("modal-close-btn");
+          modal.classList.add("active");
+          modalCloseBtn.addEventListener("click", function () {
+            modal.classList.remove("active");
+          });
+  
+          // Display the review in the place details
+          const reviewList = resultDiv.querySelector(".review-list");
+          const newReview = document.createElement("li");
+          newReview.innerHTML = `
+              <div class="review-header">
+                <h4>${name}</h4>
+                <img src="${
+                  rating > 0 ? "star1.png" : "no-star.png"
+                }" alt="star" />
+                <span>${rating > 0 ? rating + " stars" : "N/A"}</span>
+              </div>
+              <div class="review-body">
+                <p>${comment}</p>
+              </div>
+            `;
+          reviewList.appendChild(newReview);
+        });
+      }
     }
   }
-}
 
 // Load the Google Maps API
 function loadMapsAPI() {
